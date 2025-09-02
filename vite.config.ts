@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+declare const process: { env: Record<string, string | undefined> }
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
@@ -8,7 +10,7 @@ export default defineConfig({
     proxy: {
       // dev: http://localhost:5173/api -> http://103.217.176.16:83/api
       '/api': {
-        target: 'http://103.217.176.16:83',
+        target: process.env.VITE_API_URL || 'http://103.217.176.16:83',
         changeOrigin: true
       },
       '/public': {
