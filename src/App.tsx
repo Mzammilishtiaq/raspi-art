@@ -1,4 +1,4 @@
-import { MantineProvider, Container, Stack, createTheme, Space, TextInput, Divider, rem, Grid, Title } from '@mantine/core'
+import { MantineProvider, Stack, createTheme, TextInput, rem, Grid } from '@mantine/core'
 import { Notifications } from '@mantine/notifications'
 
 import '@mantine/core/styles.css'

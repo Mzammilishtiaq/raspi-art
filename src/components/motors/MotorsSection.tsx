@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Alert, Center, Flex, Grid, SegmentedControl, Skeleton, Stack, Text, Title } from '@mantine/core'
+import { Alert,  Flex, Grid, SegmentedControl, Skeleton, Stack, Text, Title } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { IconCircleX, IconExclamationCircle, IconHelpCircle, IconWheel } from '@tabler/icons-react'
 import ClassNames from './style/motor.module.css'

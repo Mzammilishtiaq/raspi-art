@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-import { Alert, Box, Button, Divider, Group, Skeleton, Stack, Text, Title } from '@mantine/core'
+import { Alert,  Button, Divider, Group, Skeleton, Stack, Text, Title } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { useDisclosure } from '@mantine/hooks'
-import { IconBrandAdobePhotoshop, IconExclamationCircle, IconPlus, IconSlideshow, IconVideo, IconVideoOff } from '@tabler/icons-react'
+import {  IconExclamationCircle, IconPlus,  IconVideo, IconVideoOff } from '@tabler/icons-react'
 
 import * as api from '../../api'
 import { Video } from '../../api'

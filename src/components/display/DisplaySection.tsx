@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Alert, Box, Button, CloseButton, Divider, Flex, Group, NumberFormatter, NumberInput, Skeleton, Stack, Table, Text, ThemeIcon, Title, Tooltip } from '@mantine/core'
 import { useDisclosure, useThrottledValue } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
-import { IconAdjustments, IconDeviceComputerCamera, IconDeviceDesktop, IconEdit, IconExclamationCircle, IconPlus, IconSortDescending } from '@tabler/icons-react'
+import { IconAdjustments,  IconDeviceDesktop, IconEdit, IconExclamationCircle, IconPlus, IconSortDescending } from '@tabler/icons-react'
 
 import useAsync from '../../useAsync'
 import * as api from '../../api'

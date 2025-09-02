@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Alert, Box, Button, Group, Skeleton, Stack, Text, Title } from '@mantine/core'
+import { Alert,  Button, Group, Skeleton, Stack, Text, Title } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { useDisclosure } from '@mantine/hooks'
 import { IconExclamationCircle, IconPlus, IconWifi, IconWifiOff } from '@tabler/icons-react'
