@@ -1,24 +1,25 @@
-import { Box, Center } from '@mantine/core'
-import { IconCircleCheckFilled, IconCircleXFilled, IconHelpCircleFilled } from '@tabler/icons-react'
+import { Box, Center } from '@mantine/core';
+import { IconCircleCheckFilled, IconCircleDashed, IconCircleXFilled, IconHelpCircleFilled, IconPlayerPauseFilled } from '@tabler/icons-react';
 
-import { MotorStatus, Status } from '../../api'
+export const MotorIcon = ({ motorId, status }: { motorId: number; status: string }) => {
+  const iconSize = 16;
+  const icon =
+    (status === 'error')
+      ? <IconCircleXFilled color="var(--mantine-color-red-filled)" size={iconSize} />
+      : (status === 'running')
+        ? <IconCircleCheckFilled color="var(--mantine-color-green-filled)" size={iconSize} />
+        : (status === 'idle')
+          ? <IconCircleDashed color="var(--mantine-color-gray-filled)" size={iconSize} />
+          : (status === 'paused')
+            ? <IconPlayerPauseFilled color="var(--mantine-color-yellow-filled)" size={iconSize} />
+            : <IconHelpCircleFilled color="var(--mantine-color-yellow-filled)" size={iconSize} />;
 
-export interface MotorIconProps {
-  status: MotorStatus
-}
+  return (
+    <Center>
+      {icon}
+      <Box ml={5}>{motorId}</Box>
+    </Center>
+  );
+};
 
-const iconSize = 16
-
-export const MotorIcon = ({ status }: MotorIconProps) => (
-  <Center>
-    {status.status == Status.OK
-      ? <IconCircleCheckFilled color='var(--mantine-color-green-filled)' size={iconSize} />
-      : status.status == Status.ERROR
-        ? <IconCircleXFilled color='var(--mantine-color-red-filled)' size={iconSize} />
-        : <IconHelpCircleFilled color='var(--mantine-color-yellow-filled)' size={iconSize} />
-    }
-    <Box ml={5}>{status.id}</Box>
-  </Center>
-)
-
-export default MotorIcon
+export default MotorIcon;

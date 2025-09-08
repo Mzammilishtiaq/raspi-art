@@ -10,7 +10,7 @@ export default defineConfig({
     proxy: {
       // dev: http://localhost:5173/api -> http://103.217.176.16:83/api
       '/api': {
-        target: process.env.VITE_API_URL || 'http://103.217.176.16:83',
+        target: 'http://103.217.176.16:83',
         changeOrigin: true
       },
       '/public': {

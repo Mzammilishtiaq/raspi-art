@@ -3,25 +3,22 @@ import { Alert, Box, Button, CloseButton, Divider, Flex, Group, NumberFormatter,
 import { useDisclosure, useThrottledValue } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
 import { IconAdjustments,  IconDeviceDesktop, IconEdit, IconExclamationCircle, IconPlus, IconSortDescending } from '@tabler/icons-react'
-
 import useAsync from '../../useAsync'
 import * as api from '../../api'
 import { Calibration, DisplayConfigValue, DisplaySettings, MAX_BRIGHTNESS, MAX_CONTRAST } from '../../api'
 import { INPUT_STEP_DELAY, INPUT_STEP_INTERVAL } from '../../constants'
 import { AMBIENT_LIGHT_NUM_DECIMALS, AMBIENT_LIGHT_STEP, AMBIENT_LIGHT_SUFFIX, calculateBrightnessAndContrast, mapWithSeen, MAX_READABLE_AMBIENT_LIGHT, readableToNormalizedAmbientLight, toNumber, normalizedToReadableAmbientLight, rawTormalizedAmbientLight } from './displayUtils'
-
-
 import ValueDisplay from './ValueDisplay'
 import SleepSettings from './SleepSettings'
 import DisplaySettingsGraph from './DisplaySettingsGraph'
 import CalibrateLightSensorModal from './CalibrateLightSensorModal'
 import classes from './style/display.module.css'
+
+
 const DUPLICATE_VALUE_MESSAGE = 'Duplicate value. Row will be ignored.'
 const INVALID_VALUE_MESSAGE = 'Invalid value. Row will be ignored.'
-
 const NO_LIGHT_SENSOR_DATA_ERROR = 'Light sensor data not receieved.'
 const INVALID_SETTINGS_ERROR = 'Invalid configuration'
-
 const alignCellsTopStyle = { verticalAlign: 'top' }
 
 /**

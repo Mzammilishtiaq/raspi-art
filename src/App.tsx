@@ -31,10 +31,10 @@ export const App = () => (
     <Notifications />
       <Stack p={40}>
         <Grid >
-          <Grid.Col span={6}><NetworkSection /></Grid.Col>
-          <Grid.Col span={6}><DisplaySection /></Grid.Col>
-          <Grid.Col span={6}><VideoSection /></Grid.Col>
           <Grid.Col span={6}><MotorsSection /></Grid.Col>
+          <Grid.Col span={6}><DisplaySection /></Grid.Col>
+          <Grid.Col span={6}><NetworkSection /></Grid.Col>
+          <Grid.Col span={6}><VideoSection /></Grid.Col>
         </Grid>
       </Stack>
         {/* <Space /> */}
