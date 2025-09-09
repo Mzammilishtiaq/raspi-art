@@ -14,7 +14,7 @@ const mockLastCommand: Record<MotorId, LastCommand> = {
   1: { action: 'stop',   ts: Math.floor(Date.now() / 1000) - 30 },
   2: { action: 'stop',   ts: Math.floor(Date.now() / 1000) - 30 },
   3: { action: 'stop',   ts: Math.floor(Date.now() / 1000) - 30 },
-  4: { action: 'stop',   ts: Math.floor(Date.now() / 1000) - 30 },
+  4: { action: 'start',   ts: Math.floor(Date.now() / 1000) - 30 },
 };
 
 /* -------------------- API -------------------- */

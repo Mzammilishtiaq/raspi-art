@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-import { Alert,  Button, Divider, Group, Skeleton, Stack, Text, Title } from '@mantine/core'
+import { Alert, Button, Divider, Group, Skeleton, Stack, Text, Title } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { useDisclosure } from '@mantine/hooks'
-import {  IconExclamationCircle, IconPlus,  IconVideo, IconVideoOff } from '@tabler/icons-react'
+import { IconExclamationCircle, IconPlus, IconVideo, IconVideoOff } from '@tabler/icons-react'
 
 import * as api from '../../api'
 import { Video } from '../../api'
@@ -194,7 +194,7 @@ export const VideoSection = () => {
           </>
           :
           <Stack justify='center' align='center' className={Classes.noVideos} gap='xs'>
-            <IconVideoOff size={50} color='#868e96' order={3}/>
+            <IconVideoOff size={50} color='#868e96' order={3} />
             <Title ta='center' order={6} c='dimmed' fw={400}>No Uploads</Title>
             <Text size='xs' c='dimmed'>Click Add Video above to upload</Text>
           </Stack>

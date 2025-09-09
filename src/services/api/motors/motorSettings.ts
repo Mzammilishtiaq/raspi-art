@@ -5,12 +5,12 @@ const USE_MOCK = true;
 
 const mockSettings: Record<MotorId, MotorSettingItem[]> = {
     1: [
-        { index: 1, items: { max_speed: 10000, acceleration: 100, invert: false, extra: {} } },
+        { index: 1, items: { max_speed: 10000, acceleration: 100, invert: true, extra: {} } },
         { index: 2, items: { max_speed: 9000, acceleration: 100, invert: false, extra: {} } },
     ],
     2: [{ index: 1, items: { max_speed: 8000, acceleration: 80, invert: false, extra: { profile: 'soft' } } }],
-    3: [],
-    4: [],
+    3: [{ index: 1, items: { max_speed: 8000, acceleration: 80, invert: true, extra: { profile: 'soft' } } }],
+    4: [{ index: 1, items: { max_speed: 8000, acceleration: 80, invert: false, extra: { profile: 'soft' } } }],
 };
 
 // GET /api/motors/{motor_id}/settings

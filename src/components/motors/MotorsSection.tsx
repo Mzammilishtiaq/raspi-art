@@ -8,6 +8,7 @@ import { MotorId,MotorStatus} from '../../services/api/motors/types/motortype'
 import {getStatus} from '../../services/api/motors/status'
 import MotorSettings from './MotorSettings'
 import MotorProgramUI from './MotorProgram'
+import MotorCommand from './MotorCommand'
 export const MotorsSection = () => {
   // const { value: sequences, setValue: setSequences, loading, error } = useAsync(api.getMotorSequences, [])
   const isGetAllMotor: MotorId[] = [1, 2, 3, 4];
@@ -126,6 +127,7 @@ export const MotorsSection = () => {
       } */}
 <MotorProgramUI motorId={selectedMotorId}/>
 <MotorSettings motorId={selectedMotorId}/>
+<MotorCommand motorId={selectedMotorId}/>
     </Stack >
   )
 }
