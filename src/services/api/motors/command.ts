@@ -1,5 +1,5 @@
 import api from '../../client';
-import { tryOrMock, USE_MOCK } from '../../helper/helper';
+import { tryOrMock} from '../../helper/helper';
 import type { MotorId } from '../../api/motors/types/motortype';
 
 export type CommandAction = 'start' | 'pause' | 'resume' | 'stop' | 'zero' | 'reverse';

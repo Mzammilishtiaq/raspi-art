@@ -1,11 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ActionIcon, Button, CloseButton, Group, NumberInput, Stack, Table, Text, Tooltip,
 } from '@mantine/core';
-import { IconChevronDown, IconChevronUp, IconDeviceFloppy, IconPlus, IconTrash, IconEdit } from '@tabler/icons-react';
+import { IconChevronDown, IconChevronUp, IconPlus, IconEdit } from '@tabler/icons-react';
 import type { MotorId, Program, ProgramStep, ProgramSummary } from '../../services/api/motors/types/motortype';
-import { getProgram, putProgram, postQuickSequence, getProgramTotalDuration } from '../../services/api/motors/motorProgram';
-import { USE_MOCK } from '../../services/helper/helper';
+import { getProgram, postQuickSequence, getProgramTotalDuration } from '../../services/api/motors/motorProgram';
 import ClassNames from './style/motor.module.css'
 import { INPUT_STEP_DELAY, INPUT_STEP_INTERVAL } from '../../constants';
 type Props = {
@@ -24,9 +23,8 @@ export default function MotorProgramUI({ motorId, compact }: Props) {
   const [rows, setRows] = useState(program.steps);
   const [summary, setSummary] = useState<ProgramSummary>({ mode: 'sequence', total_duration_s: 0, steps_count: 0 });
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-  const [quickDur, setQuickDur] = useState(1.0);
-  const [quickRpm, setQuickRpm] = useState(0);
+  const [quickDur] = useState(1.0);
+  const [quickRpm] = useState(0);
   const [isEditing, setIsEditing] = useState(false)
 
   const toNumberOrReturnValue = (value: string) => {
@@ -100,7 +98,6 @@ export default function MotorProgramUI({ motorId, compact }: Props) {
     setRows(prev => prev.map((s, idx) => (idx === i ? { ...s, ...patch } : s)));
 
   const saveEdit = async () => {
-    setSaving(true);
     try {
       const normalized: Program = {
         mode: 'sequence',
@@ -118,14 +115,13 @@ export default function MotorProgramUI({ motorId, compact }: Props) {
       setSummary(s => ({ ...s, total_duration_s: d, steps_count: rows.length }));
       setIsEditing(false);
     } finally {
-      setSaving(false);
     }
   };
 
-  const refreshTotalFromServer = async () => {
-    const d = await getProgramTotalDuration(motorId);
-    setSummary(s => ({ ...s, total_duration_s: d, steps_count: rows.length }));
-  };
+  // const refreshTotalFromServer = async () => {
+  //   const d = await getProgramTotalDuration(motorId);
+  //   setSummary(s => ({ ...s, total_duration_s: d, steps_count: rows.length }));
+  // };
 
   const addRow = async () => {
     const newStep = {

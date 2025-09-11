@@ -8,9 +8,9 @@ import '@mantine/charts/styles.css'
 import './App.css'
 
 import MotorsSection from './components/motors/MotorsSection'
-// import VideoSection from './components/videos/VideoSection'
-// import DisplaySection from './components/display/DisplaySection'
-// import NetworkSection from './components/networks/NetworksSection'
+import VideoSection from './components/videos/VideoSection'
+import DisplaySection from './components/display/DisplaySection'
+import NetworkSection from './components/networks/NetworksSection'
 
 const theme = createTheme({
   primaryColor: 'green',
@@ -32,9 +32,9 @@ export const App = () => (
       <Stack p={40}>
         <Grid >
           <Grid.Col span={6}><MotorsSection /></Grid.Col>
-          {/* <Grid.Col span={6}><DisplaySection /></Grid.Col>
+          <Grid.Col span={6}><DisplaySection /></Grid.Col>
           <Grid.Col span={6}><NetworkSection /></Grid.Col>
-          <Grid.Col span={6}><VideoSection /></Grid.Col> */}
+          <Grid.Col span={6}><VideoSection /></Grid.Col>
         </Grid>
       </Stack>
         {/* <Space /> */}

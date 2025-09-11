@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ActionIcon, Button, Group, Stack, Text, Tooltip } from '@mantine/core';
+import { Button, Group, Stack, Text, Tooltip } from '@mantine/core';
 import {
     IconPlayerPlay, IconPlayerPause, IconRefresh, IconPlayerStop,
     IconTarget, IconRotate, IconHistory

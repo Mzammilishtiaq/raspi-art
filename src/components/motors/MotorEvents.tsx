@@ -1,52 +1,52 @@
 import { useState } from 'react'
-import { Button, CloseButton, NumberInput, Stack, Text, Table, Group, NumberFormatter, Tooltip, ThemeIcon, Box, ActionIcon, Menu, MenuItem} from '@mantine/core'
-import { IconChevronDown, IconChevronUp, IconCopy, IconEdit, IconHelpCircle, IconPlus, IconTrash } from '@tabler/icons-react'
+import { Button, Stack, Text, Table, Group, Tooltip, ThemeIcon, Box, Menu} from '@mantine/core'
+import { IconChevronDown, IconCopy, IconEdit, IconHelpCircle, IconPlus} from '@tabler/icons-react'
 
-import { MotorEvent, MotorSequence } from '../../api'
-import { INPUT_STEP_DELAY, INPUT_STEP_INTERVAL } from '../../constants'
+// import { MotorEvent, MotorSequence } from '../../api'
+// import { INPUT_STEP_DELAY, INPUT_STEP_INTERVAL } from '../../constants'
 import ClassNames from './style/motor.module.css'
-const MIN_DURATION_SECONDS = 0.1
-const MAX_MOTOR_SPEED = 100000
-const DURATION_NUM_DECIMAL_PLACES = 1
+// const MIN_DURATION_SECONDS = 0.1
+// const MAX_MOTOR_SPEED = 100000
+// const DURATION_NUM_DECIMAL_PLACES = 1
 
-const DEFAULT_EVENT: InternalMotorEvent = { speed: '0', duration: '1' }
-const DEFAULT_EVENTAngular: AngularInternalMotorEvent = {
-  duration: '10',
-  targetAngle: '1',
-  acceleration: '10',
-  direction: 'clockwise'
-}
+// const DEFAULT_EVENT: InternalMotorEvent = { speed: '0', duration: '1' }
+// const DEFAULT_EVENTAngular: AngularInternalMotorEvent = {
+//   duration: '10',
+//   targetAngle: '1',
+//   acceleration: '10',
+//   direction: 'clockwise'
+// }
 
-interface InternalMotorEvent {
-  speed: string
-  duration: string
-}
-interface AngularInternalMotorEvent {
-  duration?: string
-  targetAngle?: string
-  acceleration?: string
-  direction?: 'clockwise' | 'anticlockwise' | 'zero'
-}
+// interface InternalMotorEvent {
+//   speed: string
+//   duration: string
+// }
+// interface AngularInternalMotorEvent {
+//   duration?: string
+//   targetAngle?: string
+//   acceleration?: string
+//   direction?: 'clockwise' | 'anticlockwise' | 'zero'
+// }
 
-const toNumberOrReturnValue = (value: string) => {
-  const converted = parseFloat(value)
-  return isNaN(converted) ? value : converted
-}
+// const toNumberOrReturnValue = (value: string) => {
+//   const converted = parseFloat(value)
+//   return isNaN(converted) ? value : converted
+// }
 
-const toNumber = (value: string, defaultValue: number = 0) => {
-  const converted = parseFloat(value)
-  return isNaN(converted) ? defaultValue : converted
-}
+// const toNumber = (value: string, defaultValue: number = 0) => {
+//   const converted = parseFloat(value)
+//   return isNaN(converted) ? defaultValue : converted
+// }
 
-const mapToInternal = (events: MotorEvent[]) => events.map(event => ({
-  speed: event.speed.toFixed(),
-  duration: (event.duration / 1000).toFixed(DURATION_NUM_DECIMAL_PLACES)
-}))
+// const mapToInternal = (events: MotorEvent[]) => events.map(event => ({
+//   speed: event.speed.toFixed(),
+//   duration: (event.duration / 1000).toFixed(DURATION_NUM_DECIMAL_PLACES)
+// }))
 
-const mapToExternal = (events: InternalMotorEvent[]) => events.map(event => ({
-  speed: toNumber(event.speed, 0),
-  duration: Math.round(toNumber(event.duration, MIN_DURATION_SECONDS) * 1000)
-}))
+// const mapToExternal = (events: InternalMotorEvent[]) => events.map(event => ({
+//   speed: toNumber(event.speed, 0),
+//   duration: Math.round(toNumber(event.duration, MIN_DURATION_SECONDS) * 1000)
+// }))
 
 export interface MotorSequenceProps {
   // sequences?: MotorSequence[]
@@ -82,106 +82,106 @@ export const MotorEvents = ({ }: MotorSequenceProps) => {
     // ])
   }
 
-  const clearEvents = () => {
+  // const clearEvents = () => {
     // setInternalEvents([DEFAULT_EVENT])
     // setAngularInternalEvents([DEFAULT_EVENTAngular])
-  }
-  const loadDataFrom = (otherMotorSequence: MotorSequence) => {
+  // }
+  // const loadDataFrom = (otherMotorSequence: MotorSequence) => {
     // setInternalEvents(mapToInternal(otherMotorSequence.events))
-  }
+  // }
 
-  const moveEvent = (index: number, moveForward: boolean) => {
-    const moveBy = moveForward ? 1 : -1
-    const newIndex = index + moveBy
+  // const moveEvent = (index: number, moveForward: boolean) => {
+  //   const moveBy = moveForward ? 1 : -1
+  //   const newIndex = index + moveBy
     // if (newIndex < 0 || newIndex >= internalEvents.length) {
       // return
     // }
 
-    const sliceShift = moveForward ? 0 : 1
+    // const sliceShift = moveForward ? 0 : 1
     // const startSlice = internalEvents.slice(0, index - sliceShift)
     // const endSlice = internalEvents.slice(index - sliceShift + 2, internalEvents.length)
     // const innerFirst = moveForward ? internalEvents[index + 1] : internalEvents[index]
     // const innerSecond = moveForward ? internalEvents[index] : internalEvents[index - 1]
     // setInternalEvents([...startSlice, innerFirst, innerSecond, ...endSlice])
-  }
+  // }
 
-  const deleteEvent = (index: number) => {
+  // const deleteEvent = (index: number) => {
     // setInternalEvents(internalEvents.filter((_, i) => i != index))
-  }
+  // }
 
 
 
-  const updateEvent = (partialEvent: Partial<InternalMotorEvent>, index: number) => {
+  // const updateEvent = (partialEvent: Partial<InternalMotorEvent>, index: number) => {
     // setInternalEvents(internalEvents.map((event, i) => i == index ? { ...event, ...partialEvent } : event))
-  }
-  const generateTableRows = (events: InternalMotorEvent[]) => events.map((event, index) => (
-    <Table.Tr key={index}>
-      <Table.Td>{index + 1}</Table.Td>
-      <Table.Td>{event.duration}</Table.Td>
-      <Table.Td>{event.speed}</Table.Td>
-    </Table.Tr>
-  ))
+  // }
+  // const generateTableRows = (events: InternalMotorEvent[]) => events.map((event, index) => (
+  //   <Table.Tr key={index}>
+  //     <Table.Td>{index + 1}</Table.Td>
+  //     <Table.Td>{event.duration}</Table.Td>
+  //     <Table.Td>{event.speed}</Table.Td>
+  //   </Table.Tr>
+  // ))
 
-  const generateEditTableRows = (events: InternalMotorEvent[]) => events.map((event, index) => (
-    <Table.Tr key={index}>
-      <Table.Td>
-        <NumberInput
-          min={MIN_DURATION_SECONDS}
-          decimalScale={DURATION_NUM_DECIMAL_PLACES}
-          value={toNumberOrReturnValue(event.duration)}
-          step={MIN_DURATION_SECONDS}
-          allowNegative={false}
-          stepHoldDelay={INPUT_STEP_DELAY}
-          stepHoldInterval={INPUT_STEP_INTERVAL}
-          minLength={5}
-          onChange={value => updateEvent({ duration: value.toString() }, index)} />
-      </Table.Td>
-      <Table.Td>
-        <NumberInput
-          min={-MAX_MOTOR_SPEED}
-          max={MAX_MOTOR_SPEED}
-          stepHoldDelay={INPUT_STEP_DELAY}
-          stepHoldInterval={INPUT_STEP_INTERVAL}
-          allowDecimal={false}
-          minLength={5}
-          value={toNumberOrReturnValue(event.speed)}
-          onChange={value => updateEvent({ speed: value.toString() }, index)} />
-      </Table.Td>
-      <Table.Td width={120}>
-        <Group>
-          <Group gap={0}>
-            <Tooltip hidden={events.length <= 1} disabled={events.length <= 1} label='Move Up'>
-              <ActionIcon
-                hidden={events.length <= 1}
-                disabled={index == 0}
-                variant='subtle'
-                radius='xl'
-                onClick={() => moveEvent(index, false)}>
-                <IconChevronUp />
-              </ActionIcon>
-            </Tooltip>
-            <Tooltip hidden={events.length <= 1} disabled={events.length <= 1} label='Move Down'>
-              <ActionIcon
-                hidden={events.length <= 1}
-                disabled={index == events.length - 1}
-                variant='subtle'
-                radius='xl'
-                onClick={() => moveEvent(index, true)}>
-                <IconChevronDown />
-              </ActionIcon>
-            </Tooltip>
-          </Group>
-          <Tooltip hidden={events.length <= 1} disabled={events.length <= 1} label='Delete Row'>
-            <CloseButton
-              hidden={events.length <= 1}
-              disabled={events.length <= 1}
-              radius='xl'
-              onClick={() => deleteEvent(index)} />
-          </Tooltip>
-        </Group>
-      </Table.Td>
-    </Table.Tr>
-  ))
+  // const generateEditTableRows = (events: InternalMotorEvent[]) => events.map((event, index) => (
+  //   <Table.Tr key={index}>
+  //     <Table.Td>
+  //       <NumberInput
+  //         min={MIN_DURATION_SECONDS}
+  //         decimalScale={DURATION_NUM_DECIMAL_PLACES}
+  //         value={toNumberOrReturnValue(event.duration)}
+  //         step={MIN_DURATION_SECONDS}
+  //         allowNegative={false}
+  //         stepHoldDelay={INPUT_STEP_DELAY}
+  //         stepHoldInterval={INPUT_STEP_INTERVAL}
+  //         minLength={5}
+  //         onChange={value => updateEvent({ duration: value.toString() }, index)} />
+  //     </Table.Td>
+  //     <Table.Td>
+  //       <NumberInput
+  //         min={-MAX_MOTOR_SPEED}
+  //         max={MAX_MOTOR_SPEED}
+  //         stepHoldDelay={INPUT_STEP_DELAY}
+  //         stepHoldInterval={INPUT_STEP_INTERVAL}
+  //         allowDecimal={false}
+  //         minLength={5}
+  //         value={toNumberOrReturnValue(event.speed)}
+  //         onChange={value => updateEvent({ speed: value.toString() }, index)} />
+  //     </Table.Td>
+  //     <Table.Td width={120}>
+  //       <Group>
+  //         <Group gap={0}>
+  //           <Tooltip hidden={events.length <= 1} disabled={events.length <= 1} label='Move Up'>
+  //             <ActionIcon
+  //               hidden={events.length <= 1}
+  //               disabled={index == 0}
+  //               variant='subtle'
+  //               radius='xl'
+  //               onClick={() => moveEvent(index, false)}>
+  //               <IconChevronUp />
+  //             </ActionIcon>
+  //           </Tooltip>
+  //           <Tooltip hidden={events.length <= 1} disabled={events.length <= 1} label='Move Down'>
+  //             <ActionIcon
+  //               hidden={events.length <= 1}
+  //               disabled={index == events.length - 1}
+  //               variant='subtle'
+  //               radius='xl'
+  //               onClick={() => moveEvent(index, true)}>
+  //               <IconChevronDown />
+  //             </ActionIcon>
+  //           </Tooltip>
+  //         </Group>
+  //         <Tooltip hidden={events.length <= 1} disabled={events.length <= 1} label='Delete Row'>
+  //           <CloseButton
+  //             hidden={events.length <= 1}
+  //             disabled={events.length <= 1}
+  //             radius='xl'
+  //             onClick={() => deleteEvent(index)} />
+  //         </Tooltip>
+  //       </Group>
+  //     </Table.Td>
+  //   </Table.Tr>
+  // ))
 
   // const rows = isEditing
   //   ? generateEditTableRows(internalEvents)

@@ -1,4 +1,4 @@
-import { Modal, Stack, Box, LoadingOverlay, Button, Text, Flex } from '@mantine/core';
+import { Modal, Stack, Box, LoadingOverlay, Button, Text} from '@mantine/core';
 
 export interface AddVideoModalProps {
     opened: boolean
@@ -7,7 +7,7 @@ export interface AddVideoModalProps {
     onDelete: (title: string, file: File) => void
 }
 
-export const AddVideoModal = ({ opened, loading, close, onDelete }: AddVideoModalProps) => {
+export const AddVideoModal = ({ opened, loading, close}: AddVideoModalProps) => {
 
     return (
         <Modal size='md' opened={opened} onClose={close}  centered withCloseButton={false}>
