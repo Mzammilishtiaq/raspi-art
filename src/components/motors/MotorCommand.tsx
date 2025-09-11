@@ -5,8 +5,9 @@ import {
     IconTarget, IconRotate, IconHistory
 } from '@tabler/icons-react';
 import type { MotorId } from '../../services/api/motors/types/motortype';
-import { postCommand, getLastCommand, type CommandAction } from '../../services/api/motors/command';
-import { USE_MOCK } from '../../services/helper/helper';
+import { postCommand, getLastCommand} from '../../services/api/motors/command';
+type CommandAction = 'start' | 'pause' | 'resume' | 'stop' | 'zero' | 'reverse';
+
 
 type Props = {
     motorId: MotorId;
@@ -65,75 +66,37 @@ export default function MotorCommand({ motorId, pollMs = 1500, onActionDone }: P
                     <IconHistory size={16} />
                     <Text c="dimmed" size="sm">
                         Last: <strong>{lastAction}</strong> at {fmtTs(lastTs)}
-                        {USE_MOCK ? ' (mock)' : ''}
                     </Text>
                 </Group>
             </Group>
 
             <Group gap="xs" wrap="wrap">
-                <Button
-                    size="xs"
-                    leftSection={<IconPlayerPlay size={14} />}
-                    onClick={() => send('start')}
-                    loading={sending === 'start'}
-                >
-                    Start
-                </Button>
+  {[
+    { action: 'start', label: 'Start', icon: <IconPlayerPlay size={14} />, color: 'green' },
+    { action: 'pause', label: 'Pause', icon: <IconPlayerPause size={14} />, color: 'orange' },
+    { action: 'resume', label: 'Resume', icon: <IconRefresh size={14} />, color: 'blue' },
+    { action: 'stop', label: 'Stop', icon: <IconPlayerStop size={14} />, color: 'red' },
+    { action: 'zero', label: 'Zero', icon: <IconTarget size={14} />, color: 'gray', tooltip: 'Zero absolute encoder' },
+    { action: 'reverse', label: 'Reverse', icon: <IconRotate size={14} />, color: 'gray', tooltip: 'Reverse program directions (controller-defined)' },
+  ].map((btn) => {
+    const button = (
+      <Button
+        key={btn.action}
+        size="xs"
+        variant={lastAction === btn.action ? 'filled' : 'default'}
+        color={lastAction === btn.action ? btn.color : undefined}
+        leftSection={btn.icon}
+        onClick={() => send(btn.action as CommandAction)}
+        loading={sending === btn.action}
+      >
+        {btn.label}
+      </Button>
+    );
 
-                <Button
-                    size="xs"
-                    variant="light"
-                    leftSection={<IconPlayerPause size={14} />}
-                    onClick={() => send('pause')}
-                    loading={sending === 'pause'}
-                >
-                    Pause
-                </Button>
+    return btn.tooltip ? <Tooltip key={btn.action} label={btn.tooltip}>{button}</Tooltip> : button;
+  })}
+</Group>
 
-                <Button
-                    size="xs"
-                    variant="light"
-                    leftSection={<IconRefresh size={14} />}
-                    onClick={() => send('resume')}
-                    loading={sending === 'resume'}
-                >
-                    Resume
-                </Button>
-
-                <Button
-                    size="xs"
-                    color="red"
-                    leftSection={<IconPlayerStop size={14} />}
-                    onClick={() => send('stop')}
-                    loading={sending === 'stop'}
-                >
-                    Stop
-                </Button>
-
-                <Tooltip label="Zero absolute encoder">
-                    <Button
-                        size="xs"
-                        variant="default"
-                        leftSection={<IconTarget size={14} />}
-                        onClick={() => send('zero')}
-                        loading={sending === 'zero'}
-                    >
-                        Zero
-                    </Button>
-                </Tooltip>
-
-                <Tooltip label="Reverse program directions (controller-defined)">
-                    <Button
-                        size="xs"
-                        variant="default"
-                        leftSection={<IconRotate size={14} />}
-                        onClick={() => send('reverse')}
-                        loading={sending === 'reverse'}
-                    >
-                        Reverse
-                    </Button>
-                </Tooltip>
-            </Group>
         </Stack>
     );
 }

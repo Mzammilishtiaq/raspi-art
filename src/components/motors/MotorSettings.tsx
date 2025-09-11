@@ -1,18 +1,18 @@
-import { useEffect, useMemo, useState } from 'react';
-import { ActionIcon, Button, CloseButton, Group, Input, InputBase, NumberInput, Stack, Switch, Table, Text, Textarea, Tooltip } from '@mantine/core';
-import { IconCheck, IconChevronDown, IconChevronUp, IconDeviceFloppy, IconEdit, IconPlus, IconTicket, IconTrash } from '@tabler/icons-react';
+import { useEffect, useState } from 'react';
+import { ActionIcon, Button, CloseButton, Group, NumberInput, Stack, Switch, Table, Text, Tooltip } from '@mantine/core';
+import { IconChevronDown, IconChevronUp, IconEdit, IconTrash } from '@tabler/icons-react';
 import * as api from '../../services/api/motors/motorSettings';
-import { MotorId, MotorSettingItem, MotorSetting } from '../../services/api/motors/types/motortype';
+import { MotorId, MotorSettingItem} from '../../services/api/motors/types/motortype';
 import ClassNames from './style/motor.module.css'
-import DeleteMotorModel from './DeleteMotorModel';
+// import DeleteMotorModel from './DeleteMotorModel';
 type Props = { motorId: MotorId };
 
 export default function MotorSettings({ motorId }: Props) {
-  const MIN_DURATION_SECONDS = 0.1
-  const MAX_MOTOR_SPEED = 100000
-  const DURATION_NUM_DECIMAL_PLACES = 1
-  const INPUT_STEP_INTERVAL = 50
-  const INPUT_STEP_DELAY = 500
+  // const MIN_DURATION_SECONDS = 0.1
+  // const MAX_MOTOR_SPEED = 100000
+  // const DURATION_NUM_DECIMAL_PLACES = 1
+  // const INPUT_STEP_INTERVAL = 50
+  // const INPUT_STEP_DELAY = 500
   const [rows, setRows] = useState<MotorSettingItem[]>([]);
   const [selectedRow, setSelectedRow] = useState<{ motorId: number | null; index: number | null }>({
     motorId: null,
@@ -82,7 +82,7 @@ export default function MotorSettings({ motorId }: Props) {
     return () => { alive = false; };
   }, [motorId]);
 
-  const nextIndex = useMemo(() => (rows.length ? Math.max(...rows.map(r => r.index)) + 1 : 1), [rows]);
+  // const nextIndex = useMemo(() => (rows.length ? Math.max(...rows.map(r => r.index)) + 1 : 1), [rows]);
 
   // const addRow = () => {
   //   setRows([

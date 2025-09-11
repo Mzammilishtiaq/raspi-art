@@ -1,32 +1,65 @@
-// components/MotorStatusItem.tsx
-import { Card, Group, Stack, Text, Progress, Tooltip } from '@mantine/core';
-import MotorIcon from './MotorIcon';
-import { getStatus,putStatus} from '../../services/api/motors/status';
-import type { MotorId } from '../../services/api/motors/types/motortype';
+// MotorStatus.tsx
+import { useEffect, useState } from 'react';
+import { getStatus } from '../../services/api/motors/status';
+import { MotorStatus as MotorStatusType, MotorId } from '../../services/api/motors/types/motortype';
+import { Stack, Table } from '@mantine/core';
 
-export function MotorStatusItem({ motorId }: { motorId: MotorId }) {
-  const { status, loading } = useMotorStatus(motorId);
+const MotorStatus = ({ motorId }: { motorId: MotorId }) => {
+  const [status, setStatus] = useState<MotorStatusType | null>(null);
 
-  if (loading || !status) return <Text c="dimmed">Loading motor {motorId}…</Text>;
+  useEffect(() => {
+    const fetchStatus = async () => {
+      try {
+        const motorStatus = await getStatus(motorId);
+        setStatus(motorStatus);
+      } catch (error) {
+        console.error('Error fetching motor status:', error);
+      }
+    };
 
-  const pct = status.speed && status.speed > 0 ? Math.min(100, Math.abs((status.speed / 100000) * 100)) : 0;
+    fetchStatus();
+  }, [motorId]);
+
+  if (!status) {
+    return <div>Loading motor status...</div>;
+  }
 
   return (
-    <Card withBorder padding="sm">
-      <Group justify="space-between" align="center">
-        <MotorIcon motorId={motorId} status={status.state} />
-        <Tooltip label={status.message ?? 'OK'}>
-          <Text fw={600} tt="capitalize">{status.state}</Text>
-        </Tooltip>
-      </Group>
-
-      <Stack gap={4} mt="sm">
-        <Text size="sm">Step: {status.step_index ?? '-'}</Text>
-        <Text size="sm">Elapsed: {status.elapsed_s?.toFixed?.(1) ?? 0}s</Text>
-        <Text size="sm">Pos: {Math.round(status.position_deg ?? 0)}°</Text>
-        <Text size="sm">Speed: {status.speed ?? 0} rpm</Text>
-        <Progress value={pct} mt={6} />
-      </Stack>
-    </Card>
+<Stack>
+      <h3>Motor {motorId} Status</h3>
+    <Table>
+      <Table.Tbody>
+        <Table.Tr>
+          <Table.Td fw={600}>State</Table.Td>
+          <Table.Td bg={
+            status.state==='running'?'green':
+            status.state==='stopped'?'red':
+            status.state==='error'?'red':
+            status.state==='paused'?'yellow':
+            status.state==='idle'?'gray':
+            'blue'
+          } w={100} ta={'center'} c={'white'} style={{borderRadius: '50px'}} mb={5}>{status.state}</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+          <Table.Td fw={600}>Step Index</Table.Td>
+          <Table.Td>{status.step_index}</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+          <Table.Td fw={600}>Elapsed Time</Table.Td>
+          <Table.Td>{status.elapsed_s} seconds</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+          <Table.Td fw={600}>Position</Table.Td>
+          <Table.Td>{status.position_deg}°</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+          <Table.Td fw={600}>Speed</Table.Td>
+          <Table.Td>{status.speed} rpm</Table.Td>
+        </Table.Tr>
+      </Table.Tbody>
+    </Table>
+</Stack>
   );
-}
+};
+
+export default MotorStatus;

@@ -1,25 +1,27 @@
 import { useEffect, useState } from 'react'
-import { Alert, Flex, Grid, SegmentedControl, Stack, Title,Text } from '@mantine/core'
+import { Alert, Flex, Grid, SegmentedControl, Stack, Title, Text } from '@mantine/core'
 // import { notifications } from '@mantine/notifications'
 import { IconCircleX, IconExclamationCircle, IconWheel } from '@tabler/icons-react'
 import ClassNames from './style/motor.module.css'
 import MotorIcon from './MotorIcon'
-import { MotorId,MotorStatus} from '../../services/api/motors/types/motortype'
-import {getStatus} from '../../services/api/motors/status'
+import { MotorId, MotorStatus } from '../../services/api/motors/types/motortype'
+import { getStatus } from '../../services/api/motors/status'
 import MotorSettings from './MotorSettings'
 import MotorProgramUI from './MotorProgram'
 import MotorCommand from './MotorCommand'
+import { MotorAngle } from './MotorAngle'
+import MotorStatusComponent from './MotorStatus'
 export const MotorsSection = () => {
   // const { value: sequences, setValue: setSequences, loading, error } = useAsync(api.getMotorSequences, [])
   const isGetAllMotor: MotorId[] = [1, 2, 3, 4];
   const [selectedMotorId, setSelectedMotorId] = useState<MotorId>(1);
   const [statuses, setStatuses] = useState<Record<MotorId, MotorStatus>>({} as any);
-
+  const [tabValue, setTabValue] = useState<'program' | 'angle' | 'command' | 'setting' | 'status'>('program');
   useEffect(() => {
     console.log("motors", isGetAllMotor)
     console.log("Selected motor ID:", selectedMotorId);
   }, [selectedMotorId]);
-    useEffect(() => {
+  useEffect(() => {
     let alive = true;
 
     const poll = async () => {
@@ -95,21 +97,21 @@ export const MotorsSection = () => {
           </Flex>
         </Grid.Col>
         <Grid.Col span='content'>
-           <SegmentedControl
-        fullWidth
-        value={String(selectedMotorId)}
-        onChange={(value) => setSelectedMotorId(parseInt(value, 10) as MotorId)}
-        data={isGetAllMotor.map((motorId) => ({
-          // pass motorId AND the current status.state to the icon
-          label: (
-            <MotorIcon
-              motorId={motorId}
-              status={statuses[motorId]?.state ?? 'error'}  // <-- merges real/mock status
-            />
-          ),
-          value: String(motorId),
-        }))}
-      />
+          <SegmentedControl
+            fullWidth
+            value={String(selectedMotorId)}
+            onChange={(value) => setSelectedMotorId(parseInt(value, 10) as MotorId)}
+            data={isGetAllMotor.map((motorId) => ({
+              // pass motorId AND the current status.state to the icon
+              label: (
+                <MotorIcon
+                  motorId={motorId}
+                  status={statuses[motorId]?.state ?? 'error'}  // <-- merges real/mock status
+                />
+              ),
+              value: String(motorId),
+            }))}
+          />
         </Grid.Col>
       </Grid>
       {
@@ -125,9 +127,24 @@ export const MotorsSection = () => {
           If this persists, try power cycling the unit.
         </Alert>
       } */}
-<MotorProgramUI motorId={selectedMotorId}/>
-<MotorSettings motorId={selectedMotorId}/>
-<MotorCommand motorId={selectedMotorId}/>
+      <SegmentedControl
+        value={tabValue}
+        onChange={(value) => setTabValue(value as 'program' | 'angle' | 'command' | 'setting' | 'status')}
+        data={[
+          { label: 'Program', value: 'program' },
+          { label: 'Angle', value: 'angle' },
+          { label: 'Command', value: 'command' },
+          { label: 'Setting', value: 'setting' },
+          { label: 'Status', value: 'status' },
+        ]}
+      />
+
+      {/* Conditional Rendering based on selected tab */}
+      {tabValue === 'program' && <MotorProgramUI motorId={selectedMotorId} />}
+      {tabValue === 'command' && <MotorCommand motorId={selectedMotorId} />}
+      {tabValue === 'setting' && <MotorSettings motorId={selectedMotorId} />}
+      {tabValue === 'angle' && <MotorAngle motorId={selectedMotorId} />}
+      {tabValue === 'status' && <MotorStatusComponent motorId={selectedMotorId} />}
     </Stack >
   )
 }

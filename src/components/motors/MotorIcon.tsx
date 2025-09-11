@@ -1,5 +1,5 @@
 import { Box, Center } from '@mantine/core';
-import { IconCircleCheckFilled, IconCircleDashed, IconCircleXFilled, IconHelpCircleFilled, IconPlayerPauseFilled } from '@tabler/icons-react';
+import { IconCircleCheckFilled, IconCircleDashed, IconCircleXFilled, IconClockStop, IconHelpCircleFilled, IconPlayerPauseFilled } from '@tabler/icons-react';
 
 export const MotorIcon = ({ motorId, status }: { motorId: number; status: string }) => {
   const iconSize = 16;
@@ -12,7 +12,9 @@ export const MotorIcon = ({ motorId, status }: { motorId: number; status: string
           ? <IconCircleDashed color="var(--mantine-color-gray-filled)" size={iconSize} />
           : (status === 'paused')
             ? <IconPlayerPauseFilled color="var(--mantine-color-yellow-filled)" size={iconSize} />
-            : <IconHelpCircleFilled color="var(--mantine-color-yellow-filled)" size={iconSize} />;
+            : (status === 'stopped')
+              ? <IconClockStop color='var(--mantine-color-red-filled)' size={iconSize} />
+              : <IconHelpCircleFilled color="var(--mantine-color-yellow-filled)" size={iconSize} />;
 
   return (
     <Center>
